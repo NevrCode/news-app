@@ -101,6 +101,9 @@ flutter:
     - family: Readex
       fonts:
         - asset: assests/font/ReadexPro-Medium.ttf
+    - family: Nunito
+      fonts:
+        - asset: assests/font/Nunito-Medium.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

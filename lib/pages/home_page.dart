@@ -85,6 +85,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(6, 10, 6, 0),
                   child: Card(
+                    // Ini dynamic sesuai banyak isi data nya bang....
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     color: Colors.white,
                     elevation: 4,
