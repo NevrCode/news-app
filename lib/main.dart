@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/pages/home_page.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() {
+  sqfliteFfiInit();
+  databaseFactory = databaseFactoryFfi;
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
