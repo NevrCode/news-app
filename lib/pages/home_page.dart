@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
         child: SafeArea(
           top: true,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -149,60 +149,73 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(6, 10, 6, 0),
-      child: Card(
-        // Ini dynamic sesuai banyak isi data nya bang....
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        color: Colors.white,
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(0),
-                child: Image.network(
-                  'https://picsum.photos/seed/526/600',
-                  width: 140,
-                  height: 140,
-                  fit: BoxFit.cover,
-                ),
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
+            child: Container(
+              width: MediaQuery.sizeOf(context).width - 44,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 2,
+                    color: Color(0x2F1D2429),
+                    offset: Offset(0, 1),
+                  )
+                ],
+                borderRadius: BorderRadius.circular(8),
               ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(7, 16, 0, 0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 4),
-                      child: Text(
-                        judulBerita,
-                        style: const TextStyle(
-                          fontFamily: 'Readex',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w900,
-                        ),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.asset(
+                      'assests/images/corgi.jpeg',
+                      width: 130,
+                      height: 130,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                            child: Text(
+                              judulBerita,
+                              style: TextStyle(
+                                  fontFamily: "Readex",
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color.fromARGB(255, 63, 72, 78)),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                            child: Text(
+                              isiBerita,
+                              style: TextStyle(
+                                  fontFamily: "Readex",
+                                  fontSize: 12,
+                                  color: Color.fromARGB(255, 87, 99, 108)),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                      isiBerita,
-                      style: const TextStyle(
-                        fontFamily: 'Readex',
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

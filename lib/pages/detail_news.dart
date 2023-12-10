@@ -103,7 +103,7 @@ class _DetailPageState extends State<DetailPage> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(20, 12, 20, 4),
                               child: Text(
-                                'KAMPOS.com – Penggunaan mobil listrik, khususnya hybrid, di Indonesia terus mengalami peningkatan seiring tingginya kesadaran masyarakat akan pentingnya menjaga lingkungan dan mengurangi emisi gas buang. Berdasarkan data Gabungan Industri Kendaraan Bermotor Indonesia (Gaikindo), mobil hybrid, baik itu hybrid electric vehicle (HEV) maupun plug-in hybrid electric vehicle (PHEV), masih mendominasi pasar mobil listrik di Indonesia pada 2023. Hal tersebut terlihat dari tingginya angkanya penjualan mobil Hybrid 41.571 unit atau 77,8 persen dari total penjualan kendaraan listrik keseluruhan pada periode Januari hingga Oktober 2023. Dari jajaran kendaraan hybrid, PT Toyoto Astro Mandidi (TAM) masih memimpin penjualan pada sektor itu dengan capaian 29.183 unit. Keberhasilan Toyoto dalam memimpin persaingan di pasar kendaraan hybrid pun disinyalir berkat kualitas produk kendaraan yang mereka hasilkan. Apa saja kendaraan hybrid dari Toyota tersebut? Berikut adalah ulasannya...',
+                                'KOMPAS.com – Penggunaan mobil listrik, khususnya hybrid, di Indonesia terus mengalami pelasannya\n\nArtikel ini telah tayang di Kompas.com dengan judul unt415/jadi-penguasa-pasar-ini-deretan-kendaraan-hybrid-dari-toyota.\n\n\nKompascom+ baca berita tanpa iklan: https://kmp.im/plus6\nDownload aplikasi: https://kmp.im/app6',
                                 style: TextStyle(
                                     fontFamily: "Readex",
                                     fontSize: 16,
@@ -114,14 +114,14 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                       ],
                     ),
-                    const Divider(
+                    Divider(
                       height: 24,
                       thickness: 2,
                       indent: 20,
                       endIndent: 20,
                       color: Color.fromARGB(255, 224, 227, 231),
                     ),
-                    const Row(
+                    Row(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -141,13 +141,12 @@ class _DetailPageState extends State<DetailPage> {
                       scrollDirection: Axis.vertical,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16, 0, 16, 8),
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
                           child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: const [
+                              boxShadow: [
                                 BoxShadow(
                                   blurRadius: 3,
                                   color: Color(0x2F1D2429),
@@ -156,14 +155,14 @@ class _DetailPageState extends State<DetailPage> {
                               ],
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16, 12, 16, 12),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
+                                  const Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -171,25 +170,22 @@ class _DetailPageState extends State<DetailPage> {
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Text(
-                                            'orang baik',
-                                            style: TextStyle(
-                                              fontFamily: "Nunito",
-                                              fontSize: 14,
-                                              color: Color.fromARGB(
-                                                  255, 75, 57, 239),
-                                            ),
-                                          ),
+                                          Text('orang baik',
+                                              style: TextStyle(
+                                                fontFamily: "Nunito",
+                                                fontSize: 14,
+                                                color: const Color.fromARGB(
+                                                    255, 75, 57, 239),
+                                              )),
                                         ],
                                       ),
                                       Text(
                                         '1 menit sebelum..',
                                         style: TextStyle(
-                                          fontFamily: "Readex",
-                                          fontSize: 14,
-                                          color:
-                                              Color.fromARGB(255, 87, 99, 108),
-                                        ),
+                                            fontFamily: "Readex",
+                                            fontSize: 14,
+                                            color: Color.fromARGB(
+                                                255, 87, 99, 108)),
                                       ),
                                     ],
                                   ),
