@@ -1,4 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import '../costum/carousel_item.dart';
+import '../costum/newscard.dart';
 import '../sqlite_handler.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -11,6 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  CarouselController cCbtn = CarouselController();
 
   Future<List<NewsCard>> generateNewsIconsFromDB() async {
     Database db = await SqliteHandler().openDB();
@@ -26,6 +30,20 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Future<List<CarouselItem>> generateCarouselItemFromDB() async {
+    Database db = await SqliteHandler().openDB();
+    List<Map<String, dynamic>> rows = await db.query('landing_kampos');
+    final dataList = await db
+        .rawQuery('SELECT judul,SUBSTR(isi,1,30) AS isi FROM landing_kampos');
+
+    return List.generate(
+      rows.length,
+      (index) => CarouselItem(
+          judulBerita: dataList[index]["judul"] as String,
+          isiBerita: dataList[index]["isi"] as String),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,15 +51,27 @@ class _HomePageState extends State<HomePage> {
       key: scaffoldKey,
       backgroundColor: const Color.fromARGB(255, 241, 244, 248),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 75, 57, 239),
+        backgroundColor: Color.fromARGB(255, 253, 253, 255),
         automaticallyImplyLeading: false,
-        title: const Text(
-          'Kampos.com',
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: "Readex",
-            fontSize: 22,
-          ),
+        title: Row(
+          children: [
+            const Text(
+              'Kampos',
+              style: TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+                fontFamily: "Readex",
+                fontSize: 22,
+              ),
+            ),
+            Text(
+              '.com',
+              style: TextStyle(
+                color: const Color.fromARGB(255, 201, 94, 94),
+                fontFamily: "Readex",
+                fontSize: 22,
+              ),
+            ),
+          ],
         ),
         actions: [
           IconButton(
@@ -67,6 +97,65 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(15, 17, 0, 0),
+                child: Text(
+                  'Trending News',
+                  style: TextStyle(
+                    fontFamily: 'Readex',
+                    fontSize: 18,
+                    color: Color.fromARGB(255, 184, 1, 1),
+                  ),
+                ),
+              ),
+              const Divider(
+                thickness: 2,
+                indent: 25,
+                endIndent: 200,
+                color: Colors.black45,
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                child: Container(
+                  width: double.infinity,
+                  height: 180,
+                  child: FutureBuilder(
+                    future: generateCarouselItemFromDB(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        List<CarouselItem> citems = snapshot.data ?? [];
+                        if (citems.isEmpty) {
+                          return const CarouselItem(
+                            judulBerita: "judulBerita",
+                            isiBerita: "isiBerita",
+                          );
+                        } else {
+                          return CarouselSlider.builder(
+                            itemCount: citems.length,
+                            options: CarouselOptions(
+                              initialPage: 1,
+                              viewportFraction: 0.8,
+                              disableCenter: true,
+                              enlargeCenterPage: true,
+                              enlargeFactor: 0.25,
+                              enableInfiniteScroll: true,
+                              scrollDirection: Axis.horizontal,
+                              autoPlay: true,
+                            ),
+                            itemBuilder: (context, index, realIndex) {
+                              return citems[index];
+                            },
+                          );
+                        }
+                      }
+                    },
+                  ),
+                ),
+              ),
               const Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 17, 0, 0),
                 child: Row(
@@ -103,7 +192,6 @@ class _HomePageState extends State<HomePage> {
                   FutureBuilder(
                     future: generateNewsIconsFromDB(),
                     builder: (context, snapshot) {
-                      print(snapshot);
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const CircularProgressIndicator();
                       } else if (snapshot.hasError) {
@@ -134,88 +222,6 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class NewsCard extends StatelessWidget {
-  final String judulBerita;
-  final String isiBerita;
-  const NewsCard(
-      {super.key, required this.judulBerita, required this.isiBerita});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(6, 10, 6, 0),
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
-            child: Container(
-              width: MediaQuery.sizeOf(context).width - 44,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 2,
-                    color: Color(0x2F1D2429),
-                    offset: Offset(0, 1),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      'assests/images/corgi.jpeg',
-                      width: 130,
-                      height: 130,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                            child: Text(
-                              judulBerita,
-                              style: TextStyle(
-                                  fontFamily: "Readex",
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color.fromARGB(255, 63, 72, 78)),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                            child: Text(
-                              isiBerita,
-                              style: TextStyle(
-                                  fontFamily: "Readex",
-                                  fontSize: 12,
-                                  color: Color.fromARGB(255, 87, 99, 108)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
