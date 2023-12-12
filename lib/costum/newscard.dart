@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class NewsCard extends StatelessWidget {
   final String judulBerita;
   final String isiBerita;
+  final String imagePath;
   const NewsCard(
-      {super.key, required this.judulBerita, required this.isiBerita});
+      {super.key,
+      required this.judulBerita,
+      required this.isiBerita,
+      required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +20,12 @@ class NewsCard extends StatelessWidget {
         shrinkWrap: true,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
             child: Container(
               width: MediaQuery.sizeOf(context).width - 44,
               decoration: BoxDecoration(
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     blurRadius: 2,
                     color: Color(0x2F1D2429),
@@ -33,8 +39,8 @@ class NewsCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      'assests/images/corgi.jpeg',
+                    child: Image.file(
+                      File(imagePath),
                       width: 80,
                       height: 80,
                       fit: BoxFit.cover,
@@ -49,10 +55,11 @@ class NewsCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 2, 0, 0),
                             child: Text(
                               judulBerita,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: "Readex",
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
@@ -60,13 +67,14 @@ class NewsCard extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 2, 0, 0),
                             child: Text(
                               isiBerita,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: "Readex",
                                   fontSize: 8,
-                                  color: Color.fromARGB(255, 87, 99, 108)),
+                                  color: Color.fromARGB(255, 185, 211, 231)),
                             ),
                           ),
                         ],
