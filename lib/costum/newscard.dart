@@ -49,10 +49,11 @@ class NewsCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 2, 0, 0),
                             child: Text(
                               judulBerita,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: "Readex",
                                   fontSize: 10,
                                   fontWeight: FontWeight.w600,
@@ -60,13 +61,14 @@ class NewsCard extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 2, 0, 0),
                             child: Text(
                               isiBerita,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: "Readex",
                                   fontSize: 8,
-                                  color: Color.fromARGB(255, 87, 99, 108)),
+                                  color: Color.fromARGB(255, 185, 211, 231)),
                             ),
                           ),
                         ],

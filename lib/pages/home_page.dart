@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   height: 180,
                   child: FutureBuilder(
