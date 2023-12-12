@@ -19,28 +19,30 @@ class _HomePageState extends State<HomePage> {
   Future<List<NewsCard>> generateNewsIconsFromDB() async {
     Database db = await SqliteHandler().openDB();
     List<Map<String, dynamic>> rows = await db.query('landing_kampos');
-    final dataList = await db
-        .rawQuery('SELECT judul,SUBSTR(isi,1,30) AS isi FROM landing_kampos');
+    final dataList = await db.rawQuery(
+        'SELECT judul,SUBSTR(isi,1,30) AS isi, icon_image_path FROM landing_kampos');
 
     return List.generate(
       rows.length,
       (index) => NewsCard(
           judulBerita: dataList[index]["judul"] as String,
-          isiBerita: dataList[index]["isi"] as String),
+          isiBerita: dataList[index]["isi"] as String,
+          imagePath: dataList[index]["icon_image_path"] as String),
     );
   }
 
   Future<List<CarouselItem>> generateCarouselItemFromDB() async {
     Database db = await SqliteHandler().openDB();
     List<Map<String, dynamic>> rows = await db.query('landing_kampos');
-    final dataList = await db
-        .rawQuery('SELECT judul,SUBSTR(isi,1,30) AS isi FROM landing_kampos');
+    final dataList = await db.rawQuery(
+        'SELECT judul,SUBSTR(isi,1,30) AS isi, carousel_image_path FROM landing_kampos');
 
     return List.generate(
       rows.length,
       (index) => CarouselItem(
           judulBerita: dataList[index]["judul"] as String,
-          isiBerita: dataList[index]["isi"] as String),
+          isiBerita: dataList[index]["isi"] as String,
+          imagePath: dataList[index]["carousel_image_path"] as String),
     );
   }
 
@@ -51,11 +53,11 @@ class _HomePageState extends State<HomePage> {
       key: scaffoldKey,
       backgroundColor: const Color.fromARGB(255, 241, 244, 248),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 253, 253, 255),
+        backgroundColor: const Color.fromARGB(255, 253, 253, 255),
         automaticallyImplyLeading: false,
-        title: Row(
+        title: const Row(
           children: [
-            const Text(
+            Text(
               'Kampos',
               style: TextStyle(
                 color: Color.fromARGB(255, 0, 0, 0),
@@ -66,7 +68,7 @@ class _HomePageState extends State<HomePage> {
             Text(
               '.com',
               style: TextStyle(
-                color: const Color.fromARGB(255, 201, 94, 94),
+                color: Color.fromARGB(255, 201, 94, 94),
                 fontFamily: "Readex",
                 fontSize: 22,
               ),
@@ -116,7 +118,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   height: 180,
                   child: FutureBuilder(
@@ -132,6 +134,7 @@ class _HomePageState extends State<HomePage> {
                           return const CarouselItem(
                             judulBerita: "judulBerita",
                             isiBerita: "isiBerita",
+                            imagePath: "assets/images/placeholder.jpg",
                           );
                         } else {
                           return CarouselSlider.builder(
@@ -202,6 +205,7 @@ class _HomePageState extends State<HomePage> {
                           return const NewsCard(
                             judulBerita: "Judul",
                             isiBerita: "Isi",
+                            imagePath: "assets/image/corgi.jpeg",
                           );
                         } else {
                           return ListView.builder(

@@ -114,14 +114,14 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       height: 24,
                       thickness: 2,
                       indent: 20,
                       endIndent: 20,
                       color: Color.fromARGB(255, 224, 227, 231),
                     ),
-                    Row(
+                    const Row(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -141,12 +141,13 @@ class _DetailPageState extends State<DetailPage> {
                       scrollDirection: Axis.vertical,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16, 0, 16, 8),
                           child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   blurRadius: 3,
                                   color: Color(0x2F1D2429),
@@ -155,14 +156,14 @@ class _DetailPageState extends State<DetailPage> {
                               ],
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                            child: const Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   16, 12, 16, 12),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Row(
+                                  Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -174,7 +175,7 @@ class _DetailPageState extends State<DetailPage> {
                                               style: TextStyle(
                                                 fontFamily: "Nunito",
                                                 fontSize: 14,
-                                                color: const Color.fromARGB(
+                                                color: Color.fromARGB(
                                                     255, 75, 57, 239),
                                               )),
                                         ],
