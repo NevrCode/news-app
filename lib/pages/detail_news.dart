@@ -4,11 +4,14 @@ class DetailPage extends StatefulWidget {
   final String judul;
   final String isi;
   final String comment;
-  const DetailPage(
-      {super.key,
-      required this.judul,
-      required this.isi,
-      required this.comment});
+  final String image;
+  const DetailPage({
+    super.key,
+    required this.judul,
+    required this.isi,
+    required this.comment,
+    required this.image,
+  });
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -39,13 +42,13 @@ class _DetailPageState extends State<DetailPage> {
             size: 32,
           ),
         ),
-        title: const Text(
-          'Judulnya masuk sini bang...',
-          style: TextStyle(
+        title: Text(
+          widget.judul,
+          style: const TextStyle(
             color: Color.fromARGB(255, 20, 24, 27),
             fontFamily: "Nunito",
             fontWeight: FontWeight.w600,
-            fontSize: 20,
+            fontSize: 16,
           ),
         ),
         actions: const [],
@@ -75,8 +78,8 @@ class _DetailPageState extends State<DetailPage> {
                           children: [
                             ClipRRect(
                               borderRadius: BorderRadius.circular(8),
-                              child: Image.network(
-                                'https://picsum.photos/seed/467/600',
+                              child: Image.asset(
+                                widget.image,
                                 width: 751,
                                 height: 255,
                                 fit: BoxFit.cover,
@@ -105,12 +108,12 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
                               ),
                             ),
-                            const Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 12, 20, 4),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  20, 12, 20, 4),
                               child: Text(
-                                'KOMPAS.com – Penggunaan mobil listrik, khususnya hybrid, di Indonesia terus mengalami pelasannya\n\nArtikel ini telah tayang di Kompas.com dengan judul unt415/jadi-penguasa-pasar-ini-deretan-kendaraan-hybrid-dari-toyota.\n\n\nKompascom+ baca berita tanpa iklan: https://kmp.im/plus6\nDownload aplikasi: https://kmp.im/app6',
-                                style: TextStyle(
+                                widget.isi,
+                                style: const TextStyle(
                                     fontFamily: "Readex",
                                     fontSize: 16,
                                     color: Color.fromARGB(255, 87, 99, 108)),
@@ -162,14 +165,14 @@ class _DetailPageState extends State<DetailPage> {
                               ],
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16, 12, 16, 12),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
+                                  const Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -196,17 +199,18 @@ class _DetailPageState extends State<DetailPage> {
                                       ),
                                     ],
                                   ),
-                                  Divider(
+                                  const Divider(
                                     height: 24,
                                     thickness: 2,
                                     color: Colors.white,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 4, 0, 0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0, 4, 0, 0),
                                     child: Text(
-                                      'wew ternyata dia sangat jahat hikz hikz...',
-                                      style: TextStyle(
+                                      widget.comment,
+                                      style: const TextStyle(
                                           fontFamily: "Readex",
                                           fontSize: 14,
                                           color:

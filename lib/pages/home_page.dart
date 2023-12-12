@@ -157,9 +157,10 @@ class _HomePageState extends State<HomePage> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => DetailPage(
-                                        judul: '',
+                                        judul: citems[index].judulBerita,
                                         comment: '',
-                                        isi: '',
+                                        image: citems[index].imagePath,
+                                        isi: citems[index].isiBerita,
                                       ),
                                     ),
                                   );
@@ -234,10 +235,13 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => DetailPage(
-                                              judul: 'judul',
-                                              isi: 'isi',
-                                              comment: 'comment')));
+                                        builder: (context) => DetailPage(
+                                          judul: newsCards[index].judulBerita,
+                                          comment: '',
+                                          image: newsCards[index].imagePath,
+                                          isi: newsCards[index].isiBerita,
+                                        ),
+                                      ));
                                 },
                                 child: newsCards[index],
                               );
