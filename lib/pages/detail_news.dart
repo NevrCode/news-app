@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+  final String judul;
+  final String isi;
+  final String comment;
+  const DetailPage(
+      {super.key,
+      required this.judul,
+      required this.isi,
+      required this.comment});
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -25,7 +31,7 @@ class _DetailPageState extends State<DetailPage> {
           hoverColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onTap: () async {
-            context.pop();
+            Navigator.pop(context);
           },
           child: const Icon(
             Icons.chevron_left_rounded,

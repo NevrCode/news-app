@@ -18,7 +18,8 @@ class CarouselItem extends StatelessWidget {
       height: 230,
       decoration: BoxDecoration(
         image: DecorationImage(
-            fit: BoxFit.cover, image: Image.file(File(imagePath)).image),
+            fit: BoxFit.cover, image: Image.file(File(imagePath)).image,),
+
         boxShadow: const [
           BoxShadow(
             blurRadius: 4,
@@ -28,73 +29,94 @@ class CarouselItem extends StatelessWidget {
         ],
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 70, 0),
-                child: Text(
-                  judulBerita,
-                  style: TextStyle(
-                    fontFamily: "Readex",
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    foreground: Paint()
-                      ..style = PaintingStyle.stroke
-                      ..strokeWidth = 0.8
-                      ..color = Colors.black45,
+
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Color.fromARGB(95, 0, 0, 0)),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 70, 0),
+                  child: Text(
+                    judulBerita,
+                    style: TextStyle(
+                      fontFamily: "Readex",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 1
+                        ..color = Colors.black45,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 70, 0),
-                child: Text(
-                  judulBerita,
-                  style: const TextStyle(
-                    fontFamily: "Readex",
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 70, 0),
+                  child: Text(
+                    judulBerita,
+                    style: const TextStyle(
+                      fontFamily: "Readex",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color.fromARGB(255, 239, 239, 239),
+                      shadows: [
+                        Shadow(
+                          color: Color.fromARGB(206, 0, 0, 0),
+                          offset: Offset(1, 1),
+                          blurRadius: 2,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                child: Text(
-                  isiBerita,
-                  style: TextStyle(
-                    fontFamily: "Readex",
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    foreground: Paint()
-                      ..style = PaintingStyle.stroke
-                      ..strokeWidth = 0.8
-                      ..color = Colors.black45,
+              ],
+            ),
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(5, 16, 0, 0),
+                  child: Text(
+                    isiBerita,
+                    style: TextStyle(
+                      fontFamily: "Readex",
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      foreground: Paint()
+                        ..style = PaintingStyle.stroke
+                        ..strokeWidth = 0.8
+                        ..color = Colors.black45,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                child: Text(
-                  isiBerita,
-                  style: const TextStyle(
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(5, 16, 0, 0),
+                  child: Text(
+                    isiBerita,
+                    style: const TextStyle(
                       fontFamily: "Readex",
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white),
+                      color: Color.fromARGB(255, 241, 241, 241),
+                      shadows: [
+                        Shadow(
+                          color: Color.fromARGB(192, 0, 0, 0),
+                          offset: Offset(1, 1),
+                          blurRadius: 0.0,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
