@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/pages/detail_news.dart';
 import '../costum/carousel_item.dart';
 import '../costum/newscard.dart';
 import '../sqlite_handler.dart';
@@ -147,7 +148,21 @@ class _HomePageState extends State<HomePage> {
                               autoPlay: true,
                             ),
                             itemBuilder: (context, index, realIndex) {
-                              return citems[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailPage(
+                                        judul: '',
+                                        comment: '',
+                                        isi: '',
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: citems[index],
+                              );
                             },
                           );
                         }
@@ -210,7 +225,18 @@ class _HomePageState extends State<HomePage> {
                             itemCount: newsCards.length,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return newsCards[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DetailPage(
+                                              judul: 'judul',
+                                              isi: 'isi',
+                                              comment: 'comment')));
+                                },
+                                child: newsCards[index],
+                              );
                             },
                           );
                         }
