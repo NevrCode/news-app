@@ -6,11 +6,18 @@ class CarouselItem extends StatelessWidget {
   final String judulBerita;
   final String isiBerita;
   final String imagePath;
-  const CarouselItem(
-      {super.key,
-      required this.judulBerita,
-      required this.isiBerita,
-      required this.imagePath});
+  final String newsID;
+  final String tanggal;
+  final String sub;
+  const CarouselItem({
+    super.key,
+    required this.judulBerita,
+    required this.isiBerita,
+    required this.imagePath,
+    required this.newsID,
+    required this.tanggal,
+    required this.sub,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,8 +25,9 @@ class CarouselItem extends StatelessWidget {
       height: 230,
       decoration: BoxDecoration(
         image: DecorationImage(
-            fit: BoxFit.cover, image: Image.file(File(imagePath)).image,),
-
+          fit: BoxFit.cover,
+          image: Image.file(File(imagePath)).image,
+        ),
         boxShadow: const [
           BoxShadow(
             blurRadius: 4,
@@ -29,7 +37,6 @@ class CarouselItem extends StatelessWidget {
         ],
         borderRadius: BorderRadius.circular(12),
       ),
-
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),

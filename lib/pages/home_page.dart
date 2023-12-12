@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:news_app/pages/detail_news.dart';
+import 'package:news_app/pages/profile.dart';
 import '../costum/carousel_item.dart';
 import '../costum/newscard.dart';
 import '../sqlite_handler.dart';
@@ -16,34 +18,40 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   CarouselController cCbtn = CarouselController();
-
+  var notif = Icons.notifications_none;
   Future<List<NewsCard>> generateNewsIconsFromDB() async {
     Database db = await SqliteHandler().openDB();
-    List<Map<String, dynamic>> rows = await db.query('landing_kampos');
     final dataList = await db.rawQuery(
-        'SELECT judul,SUBSTR(isi,1,30) AS isi, icon_image_path FROM landing_kampos');
+        'SELECT judul,SUBSTR(isi_berita,3,36) AS isi, icon_image_path, _id, subjudul, tanggal FROM detail_kampos');
 
     return List.generate(
-      rows.length,
+      dataList.length,
       (index) => NewsCard(
-          judulBerita: dataList[index]["judul"] as String,
-          isiBerita: dataList[index]["isi"] as String,
-          imagePath: dataList[index]["icon_image_path"] as String),
+        judulBerita: dataList[index]["judul"] as String,
+        isiBerita: dataList[index]["isi"] as String,
+        imagePath: dataList[index]["icon_image_path"] as String,
+        newsID: dataList[index]["_id"] as String,
+        tgl: dataList[index]["tanggal"] as String,
+        sub: dataList[index]["subjudul"] as String,
+      ),
     );
   }
 
   Future<List<CarouselItem>> generateCarouselItemFromDB() async {
     Database db = await SqliteHandler().openDB();
-    List<Map<String, dynamic>> rows = await db.query('landing_kampos');
     final dataList = await db.rawQuery(
-        'SELECT judul,SUBSTR(isi,1,30) AS isi, carousel_image_path FROM landing_kampos');
+        'SELECT judul,SUBSTR(isi_berita,3,36) AS isi, carousel_image_path, _id, subjudul, tanggal FROM detail_kampos');
 
     return List.generate(
-      rows.length,
+      dataList.length,
       (index) => CarouselItem(
-          judulBerita: dataList[index]["judul"] as String,
-          isiBerita: dataList[index]["isi"] as String,
-          imagePath: dataList[index]["carousel_image_path"] as String),
+        judulBerita: dataList[index]["judul"] as String,
+        isiBerita: dataList[index]["isi"] as String,
+        imagePath: dataList[index]["carousel_image_path"] as String,
+        newsID: dataList[index]["_id"] as String,
+        tanggal: dataList[index]['tanggal'] as String,
+        sub: dataList[index]['subjudul'] as String,
+      ),
     );
   }
 
@@ -66,27 +74,54 @@ class _HomePageState extends State<HomePage> {
                 fontSize: 22,
               ),
             ),
-            Text(
-              '.com',
-              style: TextStyle(
-                color: Color.fromARGB(255, 201, 94, 94),
-                fontFamily: "Readex",
-                fontSize: 22,
+            Padding(
+              padding: EdgeInsets.only(top: 3.0),
+              child: Text(
+                '.com',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 201, 94, 94),
+                  fontFamily: "Readex",
+                  fontSize: 18,
+                ),
               ),
             ),
           ],
         ),
         actions: [
           IconButton(
+            icon: Icon(notif),
             style: ButtonStyle(
-              fixedSize: MaterialStateProperty.all(const Size(40, 40)),
+                backgroundColor: MaterialStateProperty.all(
+              const Color.fromARGB(255, 241, 244, 248),
+            )),
+            onPressed: () {
+              setState(() {
+                notif = (notif == Icons.notifications_active
+                    ? Icons.notifications_none
+                    : Icons.notifications_active);
+              });
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+            child: IconButton(
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all(const Size(40, 40)),
+                backgroundColor: MaterialStateProperty.all(
+                  const Color.fromARGB(255, 241, 244, 248),
+                ),
+              ),
+              icon: const Icon(
+                Icons.person_outline_sharp,
+                size: 24,
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfilePage()));
+              },
             ),
-            icon: const Icon(
-              Icons.person_outline_sharp,
-              color: Color.fromARGB(255, 224, 227, 231),
-              size: 24,
-            ),
-            onPressed: () {},
           ),
         ],
         centerTitle: false,
@@ -132,10 +167,14 @@ class _HomePageState extends State<HomePage> {
                       } else {
                         List<CarouselItem> citems = snapshot.data ?? [];
                         if (citems.isEmpty) {
-                          return const CarouselItem(
+                          return CarouselItem(
                             judulBerita: "judulBerita",
                             isiBerita: "isiBerita",
                             imagePath: "assets/images/placeholder.jpg",
+                            newsID: "asd",
+                            tanggal: DateFormat("dd MMMM yyyy")
+                                .format(DateTime.now()),
+                            sub: "Sub Judul",
                           );
                         } else {
                           return CarouselSlider.builder(
@@ -158,9 +197,11 @@ class _HomePageState extends State<HomePage> {
                                     MaterialPageRoute(
                                       builder: (context) => DetailPage(
                                         judul: citems[index].judulBerita,
-                                        comment: '',
                                         image: citems[index].imagePath,
                                         isi: citems[index].isiBerita,
+                                        newsID: citems[index].newsID,
+                                        tgl: citems[index].tanggal,
+                                        sub: citems[index].sub,
                                       ),
                                     ),
                                   );
@@ -175,13 +216,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 17, 0, 0),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 17, 0, 0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
+                    const Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
                       child: Text(
                         'Berita Hari ini',
@@ -192,10 +233,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(15, 0, 15, 0),
                       child: Text(
-                        '9 Desember 2023',
-                        style: TextStyle(
+                        DateFormat("dd MMMM yyyy").format(DateTime.now()),
+                        style: const TextStyle(
                           fontFamily: "Readex",
                         ),
                       ),
@@ -218,10 +260,14 @@ class _HomePageState extends State<HomePage> {
                       } else {
                         List<NewsCard> newsCards = snapshot.data ?? [];
                         if (newsCards.isEmpty) {
-                          return const NewsCard(
+                          return NewsCard(
                             judulBerita: "Judul",
                             isiBerita: "Isi",
                             imagePath: "assets/image/corgi.jpeg",
+                            newsID: "asd",
+                            tgl: DateFormat("dd MMMM yyyy")
+                                .format(DateTime.now()),
+                            sub: "SubJudul",
                           );
                         } else {
                           return ListView.builder(
@@ -237,9 +283,11 @@ class _HomePageState extends State<HomePage> {
                                       MaterialPageRoute(
                                         builder: (context) => DetailPage(
                                           judul: newsCards[index].judulBerita,
-                                          comment: '',
                                           image: newsCards[index].imagePath,
                                           isi: newsCards[index].isiBerita,
+                                          newsID: newsCards[index].newsID,
+                                          tgl: newsCards[index].tgl,
+                                          sub: newsCards[index].sub,
                                         ),
                                       ));
                                 },

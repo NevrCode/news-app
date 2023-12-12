@@ -6,11 +6,18 @@ class NewsCard extends StatelessWidget {
   final String judulBerita;
   final String isiBerita;
   final String imagePath;
-  const NewsCard(
-      {super.key,
-      required this.judulBerita,
-      required this.isiBerita,
-      required this.imagePath});
+  final String newsID;
+  final String tgl;
+  final String sub;
+  const NewsCard({
+    super.key,
+    required this.judulBerita,
+    required this.isiBerita,
+    required this.imagePath,
+    required this.newsID,
+    required this.tgl,
+    required this.sub,
+  });
 
   @override
   Widget build(BuildContext context) {
