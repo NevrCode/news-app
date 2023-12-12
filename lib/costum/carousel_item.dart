@@ -21,7 +21,7 @@ class CarouselItem extends StatelessWidget {
             'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YmVhY2hlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
           ).image,
         ),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             blurRadius: 4,
             color: Color(0x250F1113),
@@ -38,7 +38,7 @@ class CarouselItem extends StatelessWidget {
           Stack(
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 70, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 70, 0),
                 child: Text(
                   judulBerita,
                   style: TextStyle(
@@ -53,10 +53,10 @@ class CarouselItem extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 70, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 70, 0),
                 child: Text(
                   judulBerita,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: "Readex",
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
@@ -69,7 +69,7 @@ class CarouselItem extends StatelessWidget {
           Stack(
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                 child: Text(
                   isiBerita,
                   style: TextStyle(
@@ -84,10 +84,10 @@ class CarouselItem extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                 child: Text(
                   isiBerita,
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontFamily: "Readex",
                       fontSize: 12,
                       fontWeight: FontWeight.w600,

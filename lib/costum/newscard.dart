@@ -14,12 +14,12 @@ class NewsCard extends StatelessWidget {
         shrinkWrap: true,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
+            padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 8),
             child: Container(
               width: MediaQuery.sizeOf(context).width - 44,
               decoration: BoxDecoration(
                 color: Colors.white,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     blurRadius: 2,
                     color: Color(0x2F1D2429),

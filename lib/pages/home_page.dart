@@ -51,11 +51,11 @@ class _HomePageState extends State<HomePage> {
       key: scaffoldKey,
       backgroundColor: const Color.fromARGB(255, 241, 244, 248),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 253, 253, 255),
+        backgroundColor: const Color.fromARGB(255, 253, 253, 255),
         automaticallyImplyLeading: false,
-        title: Row(
+        title: const Row(
           children: [
-            const Text(
+            Text(
               'Kampos',
               style: TextStyle(
                 color: Color.fromARGB(255, 0, 0, 0),
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             Text(
               '.com',
               style: TextStyle(
-                color: const Color.fromARGB(255, 201, 94, 94),
+                color: Color.fromARGB(255, 201, 94, 94),
                 fontFamily: "Readex",
                 fontSize: 22,
               ),
