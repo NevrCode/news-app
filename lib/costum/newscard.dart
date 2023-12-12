@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class NewsCard extends StatelessWidget {
   final String judulBerita;
   final String isiBerita;
+  final String imagePath;
   const NewsCard(
-      {super.key, required this.judulBerita, required this.isiBerita});
+      {super.key,
+      required this.judulBerita,
+      required this.isiBerita,
+      required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +39,8 @@ class NewsCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      'assests/images/corgi.jpeg',
+                    child: Image.file(
+                      File(imagePath),
                       width: 80,
                       height: 80,
                       fit: BoxFit.cover,

@@ -1,14 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class CarouselItem extends StatelessWidget {
   final String judulBerita;
   final String isiBerita;
-  // final String image;
-  const CarouselItem({
-    super.key,
-    required this.judulBerita,
-    required this.isiBerita,
-  });
+  final String imagePath;
+  const CarouselItem(
+      {super.key,
+      required this.judulBerita,
+      required this.isiBerita,
+      required this.imagePath});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,11 +18,7 @@ class CarouselItem extends StatelessWidget {
       height: 230,
       decoration: BoxDecoration(
         image: DecorationImage(
-          fit: BoxFit.cover,
-          image: Image.network(
-            'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YmVhY2hlc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=900&q=60',
-          ).image,
-        ),
+            fit: BoxFit.cover, image: Image.file(File(imagePath)).image),
         boxShadow: const [
           BoxShadow(
             blurRadius: 4,
