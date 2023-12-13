@@ -40,7 +40,7 @@ class CarouselItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Color.fromARGB(95, 0, 0, 0)),
+            color: const Color.fromARGB(95, 0, 0, 0)),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,

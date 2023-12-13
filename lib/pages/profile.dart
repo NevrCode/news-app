@@ -22,7 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               height: 200,
               child: Stack(
                 children: [
@@ -95,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
+              padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 0, 0),
               child: Text(
                 username,
                 style: textStyleTest,
@@ -126,17 +126,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   shape: BoxShape.rectangle,
                 ),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                  padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.account_circle_outlined,
                         color: Color.fromARGB(255, 63, 72, 78),
                         size: 24,
                       ),
                       GestureDetector(
-                        child: Padding(
+                        child: const Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                           child: Text(
                             'Edit Profile',
@@ -147,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           setState(() {});
                         },
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Align(
                           alignment: AlignmentDirectional(0.90, 0.00),
                           child: Icon(
