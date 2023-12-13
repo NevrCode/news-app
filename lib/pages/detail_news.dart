@@ -47,6 +47,18 @@ class _DetailPageState extends State<DetailPage> {
             ));
   }
 
+  String makeDate() {
+    List<String> components = widget.tgl.split("-");
+
+    int day = int.parse(components[0]);
+    int month = int.parse(components[1]);
+    int year = 2000 + int.parse(components[2]);
+
+    final dateFormat = DateFormat("dd MMMM yyyy");
+
+    return dateFormat.format(DateTime(year, month, day));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +139,7 @@ class _DetailPageState extends State<DetailPage> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   20, 8, 0, 0),
                               child: Text(
-                                widget.tgl,
+                                makeDate(),
 
                                 // widget.tgl,
                                 style: const TextStyle(
