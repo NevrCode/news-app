@@ -89,7 +89,8 @@ class CarouselItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(5, 16, 0, 0),
                   child: Text(
-                    isiBerita,
+                    tanggal,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontFamily: "Readex",
                       fontSize: 12,
@@ -104,7 +105,8 @@ class CarouselItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(5, 16, 0, 0),
                   child: Text(
-                    isiBerita,
+                    tanggal,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontFamily: "Readex",
                       fontSize: 12,

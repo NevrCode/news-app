@@ -80,6 +80,7 @@ class NewsCard extends StatelessWidget {
                                 0, 2, 0, 0),
                             child: Text(
                               isiBerita,
+                              maxLines: 4,
                               style: const TextStyle(
                                   fontFamily: "Readex",
                                   fontSize: 8,
