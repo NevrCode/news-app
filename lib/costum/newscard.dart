@@ -6,11 +6,20 @@ class NewsCard extends StatelessWidget {
   final String judulBerita;
   final String isiBerita;
   final String imagePath;
-  const NewsCard(
-      {super.key,
-      required this.judulBerita,
-      required this.isiBerita,
-      required this.imagePath});
+  final String newsID;
+  final String tgl;
+  final String sub;
+  final String bannerImagePath;
+  const NewsCard({
+    super.key,
+    required this.judulBerita,
+    required this.isiBerita,
+    required this.imagePath,
+    required this.newsID,
+    required this.tgl,
+    required this.sub,
+    required this.bannerImagePath,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +80,7 @@ class NewsCard extends StatelessWidget {
                                 0, 2, 0, 0),
                             child: Text(
                               isiBerita,
+                              maxLines: 4,
                               style: const TextStyle(
                                   fontFamily: "Readex",
                                   fontSize: 8,

@@ -6,11 +6,18 @@ class CarouselItem extends StatelessWidget {
   final String judulBerita;
   final String isiBerita;
   final String imagePath;
-  const CarouselItem(
-      {super.key,
-      required this.judulBerita,
-      required this.isiBerita,
-      required this.imagePath});
+  final String newsID;
+  final String tanggal;
+  final String sub;
+  const CarouselItem({
+    super.key,
+    required this.judulBerita,
+    required this.isiBerita,
+    required this.imagePath,
+    required this.newsID,
+    required this.tanggal,
+    required this.sub,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,8 +25,9 @@ class CarouselItem extends StatelessWidget {
       height: 230,
       decoration: BoxDecoration(
         image: DecorationImage(
-            fit: BoxFit.cover, image: Image.file(File(imagePath)).image,),
-
+          fit: BoxFit.cover,
+          image: Image.file(File(imagePath)).image,
+        ),
         boxShadow: const [
           BoxShadow(
             blurRadius: 4,
@@ -29,11 +37,10 @@ class CarouselItem extends StatelessWidget {
         ],
         borderRadius: BorderRadius.circular(12),
       ),
-
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: Color.fromARGB(95, 0, 0, 0)),
+            color: const Color.fromARGB(95, 0, 0, 0)),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
@@ -82,7 +89,8 @@ class CarouselItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(5, 16, 0, 0),
                   child: Text(
-                    isiBerita,
+                    tanggal,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontFamily: "Readex",
                       fontSize: 12,
@@ -97,7 +105,8 @@ class CarouselItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(5, 16, 0, 0),
                   child: Text(
-                    isiBerita,
+                    tanggal,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontFamily: "Readex",
                       fontSize: 12,
