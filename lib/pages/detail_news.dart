@@ -28,11 +28,10 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  Future<List<Comment>> generateCommentSection() async {
+  Future<List<Comment>> generateCommentSection(String id) async {
     Database db = await SqliteHandler().openDB();
     final dataList = await db
-        .rawQuery("SELECT * FROM komentar_kampos WHERE tempat_komen = 1");
-    print("datalist : $dataList");
+        .rawQuery("SELECT * FROM komentar_kampos WHERE tempat_komen = $id");
     return List.generate(
         dataList.length,
         (index) => Comment(
@@ -173,15 +172,13 @@ class _DetailPageState extends State<DetailPage> {
                       scrollDirection: Axis.vertical,
                       children: [
                         FutureBuilder(
-                            future: generateCommentSection(),
+                            future: generateCommentSection(widget.newsID),
                             builder: (context, snapshot) {
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
                                 return const CircularProgressIndicator();
                               } else {
-                                print("snapshot : ${snapshot.data}");
                                 List<Comment> comments = snapshot.data ?? [];
-                                print("list : $comments");
                                 if (comments.isEmpty) {
                                   return Comment(
                                     commenter: "orang baik",
