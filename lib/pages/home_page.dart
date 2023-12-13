@@ -22,13 +22,13 @@ class _HomePageState extends State<HomePage> {
   Future<List<NewsCard>> generateNewsIconsFromDB() async {
     Database db = await SqliteHandler().openDB();
     final dataList = await db.rawQuery(
-        'SELECT judul,SUBSTR(isi_berita,3,36) AS isi, icon_image_path, _id, subjudul, tanggal FROM detail_kampos');
+        'SELECT judul,isi_berita , icon_image_path, _id, subjudul, tanggal FROM detail_kampos');
 
     return List.generate(
       dataList.length,
       (index) => NewsCard(
         judulBerita: dataList[index]["judul"] as String,
-        isiBerita: dataList[index]["isi"] as String,
+        isiBerita: dataList[index]["isi_berita"] as String,
         imagePath: dataList[index]["icon_image_path"] as String,
         newsID: dataList[index]["_id"] as String,
         tgl: dataList[index]["tanggal"] as String,
@@ -40,13 +40,13 @@ class _HomePageState extends State<HomePage> {
   Future<List<CarouselItem>> generateCarouselItemFromDB() async {
     Database db = await SqliteHandler().openDB();
     final dataList = await db.rawQuery(
-        'SELECT judul,SUBSTR(isi_berita,3,36) AS isi, carousel_image_path, _id, subjudul, tanggal FROM detail_kampos');
+        'SELECT judul,tanggal , carousel_image_path, _id, subjudul, isi_berita FROM detail_kampos');
 
     return List.generate(
       dataList.length,
       (index) => CarouselItem(
         judulBerita: dataList[index]["judul"] as String,
-        isiBerita: dataList[index]["isi"] as String,
+        isiBerita: dataList[index]["isi_berita"] as String,
         imagePath: dataList[index]["carousel_image_path"] as String,
         newsID: dataList[index]["_id"] as String,
         tanggal: dataList[index]['tanggal'] as String,
@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> {
               const Divider(
                 thickness: 2,
                 indent: 25,
-                endIndent: 200,
+                endIndent: 250,
                 color: Colors.black45,
               ),
               Padding(

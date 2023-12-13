@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CarouselItem extends StatelessWidget {
   final String judulBerita;
@@ -18,6 +19,19 @@ class CarouselItem extends StatelessWidget {
     required this.tanggal,
     required this.sub,
   });
+
+  String makeDate() {
+    List<String> components = tanggal.split("-");
+
+    int day = int.parse(components[0]);
+    int month = int.parse(components[1]);
+    int year = 2000 + int.parse(components[2]);
+
+    final dateFormat = DateFormat("dd MMMM yyyy");
+
+    return dateFormat.format(DateTime(year, month, day));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -87,9 +101,9 @@ class CarouselItem extends StatelessWidget {
             Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(5, 16, 0, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 16, 0, 10),
                   child: Text(
-                    isiBerita,
+                    makeDate(),
                     style: TextStyle(
                       fontFamily: "Readex",
                       fontSize: 12,
@@ -102,9 +116,9 @@ class CarouselItem extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(5, 16, 0, 0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 16, 0, 10),
                   child: Text(
-                    isiBerita,
+                    makeDate(),
                     style: const TextStyle(
                       fontFamily: "Readex",
                       fontSize: 12,
@@ -128,13 +142,3 @@ class CarouselItem extends StatelessWidget {
     );
   }
 }
-// ClipRRect(
-//       borderRadius: BorderRadius.circular(8),
-//       child: Image.network(
-//         'https://picsum.photos/seed/179/600',
-//         width: 300,
-//         height: 200,
-//         fit: BoxFit.cover,
-//       ),
-//     );
-

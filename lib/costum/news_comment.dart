@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Comment extends StatelessWidget {
   const Comment({
@@ -11,6 +12,21 @@ class Comment extends StatelessWidget {
   final String commenter;
   final String time;
   final String comment;
+
+  String humanReadableTimeDiff(DateTime now) {
+    final format = DateFormat("dd MMMM yyyy"); // Specify your date format
+    final dateTime = format.parse(time);
+    final diff = now.difference(dateTime);
+    final days = diff.inDays;
+
+    if (days > 30) {
+      return "Long time ago..";
+    } else if (days > 0) {
+      return "$days days ago..";
+    } else {
+      return "Just now..";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,47 +51,50 @@ class Comment extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
+              padding: const EdgeInsetsDirectional.fromSTEB(8, 12, 8, 12),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(commenter,
-                              style: const TextStyle(
-                                fontFamily: "Nunito",
-                                fontSize: 12,
-                                color: Color.fromARGB(117, 75, 57, 239),
-                              )),
-                        ],
-                      ),
-                      Text(
-                        time,
-                        style: const TextStyle(
-                            fontFamily: "Readex",
-                            fontSize: 8,
-                            color: Color.fromARGB(255, 87, 99, 108)),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(commenter,
+                                style: const TextStyle(
+                                  fontFamily: "Nunito",
+                                  fontSize: 14,
+                                  color: Color.fromARGB(179, 75, 57, 239),
+                                )),
+                          ],
+                        ),
+                        Text(
+                          humanReadableTimeDiff(DateTime.now()),
+                          style: const TextStyle(
+                              fontFamily: "Readex",
+                              fontSize: 12,
+                              color: Color.fromARGB(255, 87, 99, 108)),
+                        ),
+                      ],
+                    ),
                   ),
                   const Divider(
                     height: 24,
                     thickness: 2,
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 242, 242, 242),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                     child: Text(
                       comment,
                       style: const TextStyle(
                           fontFamily: "Readex",
-                          fontSize: 11,
+                          fontSize: 13,
                           color: Color.fromARGB(255, 87, 99, 108)),
                     ),
                   ),

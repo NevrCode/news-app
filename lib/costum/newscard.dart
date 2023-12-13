@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewsCard extends StatelessWidget {
   final String judulBerita;
@@ -18,6 +19,17 @@ class NewsCard extends StatelessWidget {
     required this.tgl,
     required this.sub,
   });
+  String makeDate() {
+    List<String> components = tgl.split("-");
+
+    int day = int.parse(components[0]);
+    int month = int.parse(components[1]);
+    int year = 2000 + int.parse(components[2]);
+
+    final dateFormat = DateFormat("dd MMMM yyyy");
+
+    return dateFormat.format(DateTime(year, month, day));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +89,11 @@ class NewsCard extends StatelessWidget {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0, 2, 0, 0),
                             child: Text(
-                              isiBerita,
+                              makeDate(),
                               style: const TextStyle(
                                   fontFamily: "Readex",
                                   fontSize: 8,
-                                  color: Color.fromARGB(255, 185, 211, 231)),
+                                  color: Color.fromARGB(255, 153, 100, 251)),
                             ),
                           ),
                         ],

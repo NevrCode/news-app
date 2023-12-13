@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:news_app/constants/body_text.dart';
 import 'package:news_app/costum/news_comment.dart';
+import 'package:news_app/model/comment_inputfield.dart';
 import 'package:news_app/sqlite_handler.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -26,12 +28,15 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  bool s = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  TextEditingController namaController = TextEditingController();
+  TextEditingController komentarController = TextEditingController();
 
   Future<List<Comment>> generateCommentSection() async {
     Database db = await SqliteHandler().openDB();
-    final dataList = await db
-        .rawQuery("SELECT * FROM komentar_kampos WHERE tempat_komen = 1");
+    final dataList = await db.rawQuery(
+        "SELECT * FROM komentar_kampos WHERE tempat_komen = ${widget.newsID}");
     print("datalist : $dataList");
     return List.generate(
         dataList.length,
@@ -123,6 +128,7 @@ class _DetailPageState extends State<DetailPage> {
                                   20, 8, 0, 0),
                               child: Text(
                                 widget.tgl,
+
                                 // widget.tgl,
                                 style: const TextStyle(
                                   fontFamily: 'Readex',
@@ -159,13 +165,126 @@ class _DetailPageState extends State<DetailPage> {
                       children: [
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 12),
-                          child: Text('99+ Comments..',
+                          child: Text('10+ Comments..',
                               style: TextStyle(
                                   fontFamily: "Readex",
                                   fontSize: 14,
                                   color: Color.fromARGB(255, 87, 99, 108))),
                         ),
                       ],
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 24),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: const [
+                            BoxShadow(
+                              blurRadius: 5,
+                              color: Color(0x162D3A21),
+                              offset: Offset(0, 3),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  12, 12, 12, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              4, 0, 0, 0),
+                                      child: Column(
+                                        children: [
+                                          TextFormField(
+                                            controller: namaController,
+                                            obscureText: false,
+                                            decoration: nameInputstyle,
+                                            style: hintstyle,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 8.0),
+                                            child: TextFormField(
+                                              controller: komentarController,
+                                              obscureText: false,
+                                              decoration: commentInputstyle,
+                                              style: hintstyle,
+                                              maxLines: 8,
+                                              minLines: 3,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Divider(
+                              height: 12,
+                              thickness: 2,
+                              color: Color.fromARGB(255, 243, 243, 243),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  12, 4, 12, 12),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  ElevatedButton(
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  const Color.fromARGB(
+                                                      255, 201, 94, 94))),
+                                      onPressed: () {
+                                        CommentInput(
+                                          idBerita: widget.newsID,
+                                          nama: namaController.text,
+                                          komentar: komentarController.text,
+                                        ).insertDB();
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            backgroundColor: Color.fromARGB(
+                                                255, 0, 230, 118),
+                                            content: Text(
+                                                'Upload Komentar Berhasil'),
+                                          ),
+                                        );
+                                        setState(() {
+                                          namaController.text = "";
+                                          komentarController.text = "";
+                                          s = !s;
+                                        });
+                                      },
+                                      child: const Text(
+                                        "Submit",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255),
+                                          fontFamily: "Readex",
+                                          fontSize: 12,
+                                        ),
+                                      ))
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     ListView(
                       padding: EdgeInsets.zero,
@@ -179,9 +298,7 @@ class _DetailPageState extends State<DetailPage> {
                                   ConnectionState.waiting) {
                                 return const CircularProgressIndicator();
                               } else {
-                                print("snapshot : ${snapshot.data}");
                                 List<Comment> comments = snapshot.data ?? [];
-                                print("list : $comments");
                                 if (comments.isEmpty) {
                                   return Comment(
                                     commenter: "orang baik",
