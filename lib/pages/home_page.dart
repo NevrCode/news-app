@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   Future<List<NewsCard>> generateNewsIconsFromDB() async {
     Database db = await SqliteHandler().openDB();
     final dataList = await db.rawQuery(
-        'SELECT judul,SUBSTR(isi_berita,3,36) AS isi, icon_image_path, _id, subjudul, tanggal FROM detail_kampos');
+        'SELECT judul,SUBSTR(isi_berita,3,36) AS isi, carousel_image_path, icon_image_path, _id, subjudul, tanggal FROM detail_kampos');
 
     return List.generate(
       dataList.length,
@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
         newsID: dataList[index]["_id"] as String,
         tgl: dataList[index]["tanggal"] as String,
         sub: dataList[index]["subjudul"] as String,
+        bannerImagePath: dataList[index]["carousel_image_path"] as String,
       ),
     );
   }
@@ -268,6 +269,7 @@ class _HomePageState extends State<HomePage> {
                             tgl: DateFormat("dd MMMM yyyy")
                                 .format(DateTime.now()),
                             sub: "SubJudul",
+                            bannerImagePath: "assets/image/corgi.jpeg",
                           );
                         } else {
                           return ListView.builder(
@@ -283,7 +285,8 @@ class _HomePageState extends State<HomePage> {
                                       MaterialPageRoute(
                                         builder: (context) => DetailPage(
                                           judul: newsCards[index].judulBerita,
-                                          image: newsCards[index].imagePath,
+                                          image:
+                                              newsCards[index].bannerImagePath,
                                           isi: newsCards[index].isiBerita,
                                           newsID: newsCards[index].newsID,
                                           tgl: newsCards[index].tgl,

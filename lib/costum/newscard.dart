@@ -9,6 +9,7 @@ class NewsCard extends StatelessWidget {
   final String newsID;
   final String tgl;
   final String sub;
+  final String bannerImagePath;
   const NewsCard({
     super.key,
     required this.judulBerita,
@@ -17,6 +18,7 @@ class NewsCard extends StatelessWidget {
     required this.newsID,
     required this.tgl,
     required this.sub,
+    required this.bannerImagePath,
   });
 
   @override
