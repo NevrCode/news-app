@@ -14,13 +14,16 @@ class CommentInput {
     required this.komentar,
   });
 
-  String generateId() {
-    return "c$y";
+  Future<int> getID() async {
+    Database db = await SqliteHandler().openDB();
+    final length =
+        await db.rawQuery("SELECT COUNT(*) AS row_count FROM komentar_kampos");
+    return length[0]["row_count"] as int;
   }
 
   Future<Map<String, String>> toDBMap() async {
     return {
-      "_id": generateId(),
+      "_id": (await getID() + 1).toString(),
       "pengkomen": nama,
       "tanggal_komen": date,
       "isi_komen": komentar,
